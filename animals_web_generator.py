@@ -1,5 +1,10 @@
 import json
 
+import requests
+
+API_KEY = "bgjuxHDk4fMnA7otei0N8RUWoliZMxz9PjJ7F0ZB"
+
+
 def load_data(file_path):
     """ Loads a JSON file """
     with open(file_path, "r") as handle:
@@ -46,6 +51,12 @@ def serialize_animals(animals):
         output += serialize_animal(animal)
     return output
 
+def fetch_animals(animal_name):
+    url = "https://api.api-ninjas.com/v1/animals"
+    headers = {"X-Api-Key": API_KEY}
+    params = {"name": animal_name}
+    res = requests.get(url, headers=headers, params=params)
+    return res.json()
 
 def write_html(file_path, content):
     """Write HTML content to a file."""
@@ -53,7 +64,7 @@ def write_html(file_path, content):
         handle.write(content)
 
 def main():
-    animals = load_data("animals_data.json")
+    animals = fetch_animals("Fox")
     template_html = read_data("animals_template.html")
 
     animals_html = serialize_animals(animals)
