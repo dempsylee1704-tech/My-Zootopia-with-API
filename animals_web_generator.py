@@ -7,12 +7,12 @@ API_KEY = "bgjuxHDk4fMnA7otei0N8RUWoliZMxz9PjJ7F0ZB"
 
 def load_data(file_path):
     """ Loads a JSON file """
-    with open(file_path, "r") as handle:
+    with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
 def read_data(file_path):
-    with open(file_path, "r") as fileobj:
+    with open(file_path, "r", encoding="utf-8") as fileobj:
          return fileobj.read()
 
 def serialize_animal(animal):
@@ -64,10 +64,21 @@ def write_html(file_path, content):
         handle.write(content)
 
 def main():
-    animals = fetch_animals("Fox")
+    animal_name = input("Enter the animal you are looking for: ").strip()
+    if animal_name == "":
+        print("Please enter animal name")
+        return
+
+    animals = fetch_animals(animal_name)
+
+    if not animals:
+        animals_html = "<p>No animals found</p>"
+    else:
+        animals_html = serialize_animals(animals)
+
     template_html = read_data("animals_template.html")
 
-    animals_html = serialize_animals(animals)
+
     final_html = template_html.replace(
         "__REPLACE_ANIMALS_INFO__", animals_html
     )
