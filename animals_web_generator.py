@@ -72,7 +72,7 @@ def main():
     animals = fetch_animals(animal_name)
 
     if not animals:
-        animals_html = "<p>No animals found</p>"
+        animals_html = f'<h2>The animal "{animal_name}" does not exist.</h2>'
     else:
         animals_html = serialize_animals(animals)
 
