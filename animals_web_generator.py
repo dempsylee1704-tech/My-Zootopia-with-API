@@ -60,11 +60,11 @@ def fetch_animals(animal_name):
 
 def write_html(file_path, content):
     """Write HTML content to a file."""
-    with open(file_path, "w") as handle:
+    with open(file_path, "w", encoding="utf-8") as handle:
         handle.write(content)
 
 def main():
-    animal_name = input("Enter the animal you are looking for: ").strip()
+    animal_name = input("Enter a name of an animal: ").strip()
     if animal_name == "":
         print("Please enter animal name")
         return
@@ -84,7 +84,7 @@ def main():
     )
 
     write_html("animals.html", final_html)
-
+    print("Website was successfully generated to the file animals.html.")
 
 if __name__ == "__main__":
     main()
