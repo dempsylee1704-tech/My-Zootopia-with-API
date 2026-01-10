@@ -2,6 +2,7 @@ import json
 import data_fetcher as data
 
 
+
 def load_data(file_path):
     """ Loads a JSON file """
     with open(file_path, "r", encoding="utf-8") as handle:
