@@ -1,8 +1,5 @@
 import json
-
-import requests
-
-API_KEY = "bgjuxHDk4fMnA7otei0N8RUWoliZMxz9PjJ7F0ZB"
+import data_fetcher as data
 
 
 def load_data(file_path):
@@ -51,12 +48,6 @@ def serialize_animals(animals):
         output += serialize_animal(animal)
     return output
 
-def fetch_animals(animal_name):
-    url = "https://api.api-ninjas.com/v1/animals"
-    headers = {"X-Api-Key": API_KEY}
-    params = {"name": animal_name}
-    res = requests.get(url, headers=headers, params=params)
-    return res.json()
 
 def write_html(file_path, content):
     """Write HTML content to a file."""
@@ -69,7 +60,7 @@ def main():
         print("Please enter animal name")
         return
 
-    animals = fetch_animals(animal_name)
+    animals = data.fetch_data(animal_name)
 
     if not animals:
         animals_html = f'<h2>The animal "{animal_name}" does not exist.</h2>'
